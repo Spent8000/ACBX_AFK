@@ -1,3 +1,8 @@
+ACBX AFK
+
+Go to 'https://drive.google.com/file/d/1RzX7HjYqICn_u2WYcludQa-K9I7oUJc1/view?usp=drive_link' to download the zip file!
+Extract it wherever you would like it.
+
 1. Open 'AntiAFK-RBX.exe', skip the intro, and click Import.
 2. Navigate to the folder ACBX_AFK and select 'AntiAFK-RBX-settings.json'.
 3. Open ACBX_AFK while your ROBLOX is NOT in fullscreen, and enter your selected floor to start using potions*.
