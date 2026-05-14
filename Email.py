@@ -7,6 +7,11 @@ import re
 from email.mime.text import MIMEText
 
 try:
+    import torch
+except ImportError:
+    subprocess.check_call([sys.executable, "-m", "pip", "install", "torch", "torchvision", "torchaudio", "--index-url", "https://download.pytorch.org/whl/cu121"])
+
+try:
     import easyocr
 except ImportError:
     subprocess.check_call([sys.executable, "-m", "pip", "install", "easyocr"])
@@ -35,7 +40,10 @@ warnings.filterwarnings("ignore")
 
 width, height = pyautogui.size()
 
-reader = easyocr.Reader(['en'])
+if torch.cuda.is_available():
+    reader = easyocr.Reader(['en'], gpu=True)
+else:
+    reader = easyocr.Reader(['en'], gpu=False)
 img = pyautogui.screenshot(region=(int(width*.31), int(height* 0.035), int(width*0.38), int(height*0.069)))
 img.save("curr.png")
 if sys.argv[2] != None:

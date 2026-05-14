@@ -3,6 +3,11 @@ import subprocess
 import sys
 
 try:
+    import torch
+except ImportError:
+    subprocess.check_call([sys.executable, "-m", "pip", "install", "torch", "torchvision", "torchaudio", "--index-url", "https://download.pytorch.org/whl/cu121"])
+
+try:
     import easyocr
 except ImportError:
     subprocess.check_call([sys.executable, "-m", "pip", "install", "easyocr"])
@@ -15,7 +20,10 @@ except ImportError:
     import pyautogui
 
 # Should enter script in inventory after being clicked and leaving the main loop
-reader = easyocr.Reader(['en'])
+if torch.cuda.is_available():
+    reader = easyocr.Reader(['en'], gpu=True)
+else:
+    reader = easyocr.Reader(['en'], gpu=False)
 img = pyautogui.screenshot()
 img.save("potions.png")
 width, height = pyautogui.size()
